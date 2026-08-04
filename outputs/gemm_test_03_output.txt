@@ -1,0 +1,10 @@
+﻿Algorithm: GEMM Simple
+Result matrix: 
+42
+Execution time: 0.0000ms(averaged over100runs)
+Algorithm: GEMM Blocking
+Result matrix: 
+42
+Execution time: 0.0000ms(averaged over100runs)
+Correctness check: PASS(RESULTS MATCH)
+Block size used: 32
