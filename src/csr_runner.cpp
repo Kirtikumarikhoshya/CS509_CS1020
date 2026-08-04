@@ -1,15 +1,15 @@
 #include <iostream>
 #include <iomanip>
-#include "csr_graph.hpp"
-#include "timer.hpp"
+#include "../include/csr_graph.hpp"
+#include "../include/timer.hpp"
 
 using namespace std;
 
 static void printCSRSummary(const CSRGraph& g){
     cout << "- \n";
-    cout << CSR GRAPH SUMMARY \n";
+    cout << "CSR GRAPH SUMMARY \n";
     cout << "- \n";
-    cout << "Vertices: " g.num_vertices << "\n";
+    cout << "Vertices: "<< g.num_vertices << "\n";
     cout << "Edges : " << g.num_edges << "\n";
     cout << "source : " << g.source_vertex << "\n";
     cout << "row_ptr size : " << g.row_ptr.size() << " (Expected: " << g.num_vertices + 1 << ")\n";
@@ -62,7 +62,7 @@ try {
 
 catch (const exception& e){
     cerr << "Error : " << e.what() << "\n";
-    returen 1;
+    return 1;
 }
 
 return 0;
