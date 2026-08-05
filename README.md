@@ -1,9 +1,13 @@
  CS509 - INDIVIDUAL ASSIGNMENT 1
 
 Name: Kirti Kumari
+
 Entry No: 2026CSM1020
+
 Repository:CS509_CS1020
+
 Language:C++
+
 Environment: Windows (PowerShell) / GCC 9+ (g++) with -O2 optimization
 
 
