@@ -15,7 +15,7 @@ class Timer{
     
     }
 
-    double elapseMs() const{
+    double elapsedMs() const{
         return std::chrono::duration<double, std::milli>(end_ - start_).count();
     }
 

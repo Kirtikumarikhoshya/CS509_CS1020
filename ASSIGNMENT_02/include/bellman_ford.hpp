@@ -4,7 +4,7 @@
 #include "graph.h"
 #include <vector>
 
-struct BellmanFordResult{
+struct BellmanFordResult {
     std::vector<double> distances;
     bool has_negative_cycle = false;
     int source = 0;

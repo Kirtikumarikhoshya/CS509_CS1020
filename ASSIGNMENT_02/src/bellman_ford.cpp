@@ -2,7 +2,7 @@
 #include <limits>
 using namespace std;
 
-BellmanFordResult runBellmanFord(const CSRGraph graph,int source){
+BellmanFordResult runBellmanFord(const CSRGraph& graph,int source){
     BellmanFordResult result;
     result.source = source;
     int V = graph.num_vertices;
@@ -11,14 +11,14 @@ BellmanFordResult runBellmanFord(const CSRGraph graph,int source){
         return result;
     }
 
-    const double INF = numeric_limits<double>::infinity();
-    result.distance.assign(V, INF);
-    result.distance[source] = 0.0;
+    const double INF = std::numeric_limits<double>::infinity();
+    result.distances.assign(V, INF);
+    result.distances[source] = 0.0;
 
 
     //relaxing all E edges v-1 times
 
-    for(int iter = 0; iter <V-1; ++iter){
+    for(int iter = 0; iter < V-1; ++iter){
         bool updated = false;
 
         for(int u = 0; u < V ; ++u){
@@ -31,7 +31,7 @@ BellmanFordResult runBellmanFord(const CSRGraph graph,int source){
                 int v = graph.col_ind[idx];
                 double weight = graph.weights[idx];
 
-                if(result.distance[u] + weight < result.distances[v]){
+                if(result.distances[u] + weight < result.distances[v]){
                     result.distances[v] = result.distances[u] + weight;
                     updated = true;
                 }
@@ -52,7 +52,7 @@ BellmanFordResult runBellmanFord(const CSRGraph graph,int source){
             double weight = graph.weights[idx];
 
             if(result.distances[u] + weight < result.distances[v]){
-                result.has_negtive_cycle = true;
+                result.has_negative_cycle = true;
                 return result;// detection of negative cycle
             }
 

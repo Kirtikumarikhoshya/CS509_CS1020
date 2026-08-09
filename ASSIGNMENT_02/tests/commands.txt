@@ -1,0 +1,2 @@
+g++ -std=c++17 -O2 -Wall -Wextra -Iinclude src/csr.cpp src/bellman_ford.cpp src/bf_driver.cpp -o bin/bf_driver.exe
+.\bin\bf_driver.exe tests\bf_10.txt > bf_10_output.txt

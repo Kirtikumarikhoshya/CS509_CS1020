@@ -19,7 +19,7 @@ CSRGraph loadCSRGraph(const std::string& filename){
     //to parse header line having V and E
 while(std::getline(infile, line)){
     if (line.empty() || line[0] == '#') continue;
-    std::stringstram ss(line);
+    std::stringstream ss(line);
     if(ss >> V >> E){
         break;
     }
@@ -31,7 +31,7 @@ if(V <= 0){
 }
 
 graph.num_vertices = V;
-graph.num_edges =E;
+graph.num_edges = E;
 
 std::vector<std::vector<int>> adj_neighbors(V);
 std::vector<std::vector<double>> adj_weights(V);
@@ -39,13 +39,13 @@ std::vector<std::vector<double>> adj_weights(V);
 while(std::getline(infile, line)){
     if (line.empty() || line[0] == '#') continue;
 
-    std:: stringstram ss(line);
+    std:: stringstream ss(line);
     std:: string first_token;
     ss >> first_token;
 
     //check for SOURCE tag 
     if (first_token =="SOURCE" || first_token == "source" || first_token =="Source"){
-        ss >> graph.source_vertex;
+        ss >>  graph.source_vertex;
         continue;
     }
 
@@ -59,22 +59,27 @@ while(std::getline(infile, line)){
     if(u < 0 || u >=V)continue;
 
     int degree =0;
-    if(!(ss >> v)) break;
+    if(!(ss >> degree)) continue;
+
+    for(int i =0; i< degree; ++i){
+        int v;
+        if(!(ss >> v)) break;
+     
 
     double weight = 1.0;
     double parsed_weight;
 
-    if(ss >> parse_weight){
+    if(ss >> parsed_weight){
         weight = parsed_weight;
     }else{
         ss.clear();
     }
 
     if(v >= 0 && v < V){
-        adj_neighbours[u].push_back(v);
+        adj_neighbors[u].push_back(v);
         adj_weights[u].push_back(weight);
     }
-}
+} 
 }
 
 infile.close();
@@ -82,17 +87,17 @@ infile.close();
 
 graph.row_ptr.resize(V+1,0);
 for (int i=0; i< V; ++i){
-    graph.row_ptr[i+1] = graph.row_ptr[i]  + static_cast<int>(adj_neighbours[i].size());
+    graph.row_ptr[i+1] = graph.row_ptr[i]  + static_cast<int>(adj_neighbors[i].size());
 }
 
 int total_edges = graph.row_ptr[V];
 graph.col_ind.reserve(total_edges);
-graph_weights.reserve(total_edges);
+graph.weights.reserve(total_edges);
 
 
 for(int i= 0; i<V ; ++i){
-    for(size_t j=0; j < adj_neighbours[i].size(); ++j){
-        graph.col_ind.push_back(adj_neighbours[i][j]);
+    for(size_t j=0; j < adj_neighbors[i].size(); ++j){
+        graph.col_ind.push_back(adj_neighbors[i][j]);
         graph.weights.push_back(adj_weights[i][j]);
     }
 }
