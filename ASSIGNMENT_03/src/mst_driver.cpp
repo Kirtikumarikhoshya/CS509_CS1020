@@ -1,5 +1,7 @@
-#include "graph.h"
-#include "timer.hpp"
+// #include "graph.h"
+// #include "timer.hpp"
+#include "../include/graph.h"
+#include "../include/timer.hpp"
 #include "kruskal.hpp"
 #include "prim.hpp"
 #include <iostream>
