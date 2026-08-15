@@ -4,22 +4,23 @@
 #include <sstream>
 #include <vector>
 #include <stdexcept>
+using namespace std;
 
-CSRGraph loadCSRGraph(const std::string& filepath) {
-    std::ifstream infile(filepath);
+CSRGraph loadCSRGraph(const string& filepath) {
+    ifstream infile(filepath);
     if (!infile.is_open()) {
         throw std::runtime_error("Unable to open graph file: " + filepath);
     }
 
     CSRGraph graph;
-    std::string line;
+    string line;
 
     // Step 1: Parse the header (V and E)
-    while (std::getline(infile, line)) {
+    while (getline(infile, line)) {
         if (line.empty() || line.find_first_not_of(" \t\r\n") == std::string::npos) {
             continue;
         }
-        std::stringstream ss(line);
+        stringstream ss(line);
         if (ss >> graph.V >> graph.E) {
             break;
         }
